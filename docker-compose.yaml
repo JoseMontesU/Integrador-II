@@ -34,3 +34,13 @@ services:
       - '8078:80'
     depends_on:
       - mysql
+####################################################################################
+  registry-discovery:
+      container_name: ms-eureka
+      image: microservices/ms-eureka:0.0.1-SNAPSHOT
+      ports:
+        - 8761:8761
+      environment:
+        - JAVA_OPTS=
+          -Xms256M
+          -Xmx256M
