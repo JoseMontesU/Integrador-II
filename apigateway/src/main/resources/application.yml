@@ -15,13 +15,13 @@ spring:
   cloud:
     gateway:
       routes:
-#        - id: user_service
-#          uri: lb://ms-user
-#          predicates:
-#            - Path=/api/user/**
-#            - Method=GET,POST,PUT,DELETE
-#          filters:
-#            - name: AuthenticationFilter
+        - id: category_product_service
+          uri: lb://ms-category-product
+          predicates:
+            - Path=/api/v1/**
+            - Method=GET,POST,PUT,DELETE
+          filters:
+            - name: AuthenticationFilter
 #        - id: cita_service
 #          uri: lb://ms-citas
 #          predicates:
