@@ -1,0 +1,41 @@
+
+server:
+  port: 8079
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty.http.client: DEBUG
+spring:
+  application:
+    name: apigateway
+  cloud:
+    gateway:
+      routes:
+#        - id: user_service
+#          uri: lb://ms-user
+#          predicates:
+#            - Path=/api/user/**
+#            - Method=GET,POST,PUT,DELETE
+#          filters:
+#            - name: AuthenticationFilter
+#        - id: cita_service
+#          uri: lb://ms-citas
+#          predicates:
+#            - Path=/api/cita/**
+#            - Method=GET,POST,PUT,DELETE
+#          filters:
+#            - name: AuthenticationFilter
+#        - id: person_service
+#          uri: lb://ms-person
+#          predicates:
+#            - Path=/person/**
+#            - Method=GET,POST,PUT,DELETE
+#          filters:
+#            - name: AuthenticationFilter
+#          predicates:
+#            - Path=/**
+##            - Path=/person/**
