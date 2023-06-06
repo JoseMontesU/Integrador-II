@@ -28,12 +28,14 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
     public GatewayFilter apply(Config config) {
         return new OrderedGatewayFilter((exchange, chain) -> {
             if (!exchange.getRequest().getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
+                log.info("no hay autorizacion");
                 throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Missing  Authorization header");
             }
 
             String authHeader = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
             String[] parts = authHeader.split(" ");
             if (parts.length != 2 || !"Bearer".equals(parts[0])) {
+                log.info("Mala estructura de autorizacion");
                 throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Bad Authorization structure");
             }
             return  webclientBuilder.build()
@@ -45,8 +47,8 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                         if(response != null){
                             log.info("See Objects: " + response);
                             //check for realm-admin rol
-                            if(response.get("realm-user") == null || StringUtils.isEmpty(response.get("realm-user").asText())){
-                                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Role realm-user missing");
+                            if(response.get("user") == null || StringUtils.isEmpty(response.get("user").asText())){
+                                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Role user missing");
                             }
                         }else{
                             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Roles missing");
@@ -54,7 +56,9 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                         log.info("Exchage: "+exchange.getResponse());
                         return exchange;
                     })
-                    .onErrorMap(error -> { throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Communication Error", error.getCause());})
+                    .onErrorMap(error -> {
+                        log.info("error de comunicacion");
+                        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Communication Error", error.getCause());})
                     .flatMap(chain::filter);
         },1);
     }

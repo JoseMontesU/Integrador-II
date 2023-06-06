@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
@@ -9,38 +9,41 @@ const base_url = environment.base_url;
 })
 export class CategoryService {
 
+  httpOptions = { headers: new HttpHeaders({'Content-Type' : 'application/json',
+  'Authorization': `Bearer ${sessionStorage.getItem('token')}`})};
+
   constructor(private http: HttpClient) { }
 
   getCategories(){
 
     const endpoint = `${base_url}/categories`;
-    return this.http.get(endpoint);
+    return this.http.get(endpoint,this.httpOptions);
 
   }
 
   saveCategorie(body: any) {
     const endpoint = `${base_url}/categories`;
-    return this.http.post(endpoint, body);
+    return this.http.post(endpoint, body,this.httpOptions);
   }
 
   updateCategorie(body: any, id: any){
     const endpoint = `${base_url}/categories/ ${id}`;
-    return this.http.put(endpoint, body);
+    return this.http.put(endpoint, body, this.httpOptions);
   }
 
   deleteCategorie(id: any){
     const endpoint = `${base_url}/categories/ ${id}`;
-    return this.http.delete(endpoint);
+    return this.http.delete(endpoint, this.httpOptions);
   }
 
   getCategorieById(id: any){
     const endpoint = `${base_url}/categories/ ${id}`;
-    return this.http.get(endpoint);
+    return this.http.get(endpoint, this.httpOptions);
   }
 
   getCategoryByName(name: any){
     const endpoint = `${ base_url}/categories/filter/${name}`;
-    return this.http.get(endpoint);
+    return this.http.get(endpoint, this.httpOptions);
   }
 
   exportCategories(){

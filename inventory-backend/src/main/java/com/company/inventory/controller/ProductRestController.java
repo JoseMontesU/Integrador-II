@@ -22,7 +22,7 @@ import com.company.inventory.services.IProductService;
 import com.company.inventory.util.ProductExcelExporter;
 import com.company.inventory.util.Util;
 
-@CrossOrigin(origins = {"http://localhost:4200"})
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/v1")
 public class ProductRestController {

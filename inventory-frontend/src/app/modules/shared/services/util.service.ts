@@ -12,6 +12,12 @@ export class UtilService {
     return this.keycloakService.getUserRoles();
   }
 
+  getToken(){
+    return this.keycloakService.getToken().then(x => {
+      sessionStorage.setItem('token',x);
+    });
+  }
+
   isAdmin(){
     let roles = this.keycloakService.getUserRoles().filter( role => role == "admin");
 
