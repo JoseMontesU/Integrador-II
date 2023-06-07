@@ -38,6 +38,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                 log.info("Mala estructura de autorizacion");
                 throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Bad Authorization structure");
             }
+            log.info("Token: "+parts[1]);
             return  webclientBuilder.build()
                     .get()
                     .uri("http://keycloack/roles").header(HttpHeaders.AUTHORIZATION, parts[1])

@@ -21,7 +21,7 @@ spring:
             - Path=/api/v1/**
             - Method=GET,POST,PUT,DELETE
           filters:
-#            - name: AuthenticationFilter
+            - name: AuthenticationFilter
 #        - id: cita_service
 #          uri: lb://ms-citas
 #          predicates:
