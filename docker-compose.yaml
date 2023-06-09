@@ -52,3 +52,71 @@ services:
         - JAVA_OPTS=
           -Xms256M
           -Xmx256M
+#######################################################
+  user-microservice:
+    container_name: ms-users
+    image: microservices/ms-ms_users:0.0.1-SNAPSHOT
+    environment:
+      - JAVA_OPTS=
+        -Xms256M
+        -Xmx256M
+        -DEUREKA_SERVER=http://registry-discovery:8761/eureka/
+        -DMYSQL=jdbc:mysql://mysql/db_users?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
+        # -DWORK_ENV=production
+#        -DWORK_ENV=development
+#        -Dspring.profiles.active=production
+    depends_on:
+      - registry-discovery
+      # - configuration
+    ports:
+      - 8081:8081
+#######################################################
+  category-product-microservice:
+    container_name: ms-category-product
+    image: microservices/ms-ms_category_product:0.0.1-SNAPSHOT
+    environment:
+      - JAVA_OPTS=
+        -Xms256M
+        -Xmx256M
+        -DEUREKA_SERVER=http://registry-discovery:8761/eureka/
+        -DMYSQL=jdbc:mysql://mysql/db_inventory?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
+        # -DWORK_ENV=production
+#        -DWORK_ENV=development
+#        -Dspring.profiles.active=production
+    depends_on:
+      - registry-discovery
+      # - configuration
+    ports:
+      - 8082:8082
+ ##########################################################################  
+  apigateway:
+    container_name: apigateway
+    image: microservices/ms-apigateway:0.0.1-SNAPSHOT   
+      #All projets will have a variable value  DEUREKA_SERVER this tell where find a registry-discovery server 
+    environment:
+      - JAVA_OPTS=
+         -Xms256M 
+         -Xmx256M
+         -DEUREKA_SERVER=http://registry-discovery:8761/eureka/
+         #-Dspring.cloud.config.server.native.searchLocations=/var/config-data
+    depends_on:
+      - registry-discovery
+    ports:
+      - 8079:8079 
+##########################################################################  
+  keycloak-adapter:
+    container_name: keycloackAdapter
+    image: microservices/ms-keycloak_adapter:0.0.1-SNAPSHOT    
+      #All projets will have a variable value  DEUREKA_SERVER this tell where find a registry-discovery server 
+    environment:
+      - JAVA_OPTS=
+         -Xms256M 
+         -Xmx256M
+         -DEUREKA_SERVER=http://registry-discovery:8761/eureka/
+         -DKEYCLOACK_SERVER=http://keycloak:8080/realms/
+         -DKEYCLOACK_REAL_ID=0_dlvHjn3ff1U5K4FawgGtsEN77aOdXltvQrFEFoSTI
+         #-Dspring.cloud.config.server.native.searchLocations=/var/config-data
+    depends_on:
+      - registry-discovery
+    ports:
+      - 8088:8088

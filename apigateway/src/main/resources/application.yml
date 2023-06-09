@@ -22,13 +22,13 @@ spring:
             - Method=GET,POST,PUT,DELETE
           filters:
             - name: AuthenticationFilter
-#        - id: cita_service
-#          uri: lb://ms-citas
-#          predicates:
-#            - Path=/api/cita/**
-#            - Method=GET,POST,PUT,DELETE
-#          filters:
-#            - name: AuthenticationFilter
+        - id: user_service
+          uri: lb://ms-users
+          predicates:
+            - Path=/api/user/**
+            - Method=GET,POST,PUT,DELETE
+          filters:
+            - name: AuthenticationFilter
 #        - id: person_service
 #          uri: lb://ms-person
 #          predicates:
