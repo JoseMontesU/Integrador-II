@@ -33,7 +33,7 @@ public class Product implements Serializable {
 	
 	private String name;
 	
-	private int price;
+	private Double price;
 	
 	private int account;
 	

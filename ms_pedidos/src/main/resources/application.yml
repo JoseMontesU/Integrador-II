@@ -1,21 +1,20 @@
-
 server:
-  port: ${PORT:8082}
+  port: ${PORT:8083}
 eureka:
   client:
     serviceUrl:
       defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
 spring:
   application:
-    name: ms-category-product
+    name: ms-pedidos
   datasource:
-    url: ${MYSQL:jdbc:mysql://localhost/db_inventory?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC}
+    url: ${MYSQL:jdbc:mysql://localhost/db_pedidos?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC}
     username: root
     password: neo.123
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     database-platform: org.hibernate.dialect.MySQL8Dialect
   servlet:
     multipart:

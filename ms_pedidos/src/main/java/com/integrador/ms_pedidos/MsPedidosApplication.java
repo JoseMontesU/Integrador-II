@@ -1,0 +1,15 @@
+package com.integrador.ms_pedidos;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+
+@EnableEurekaClient
+@SpringBootApplication
+public class MsPedidosApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(MsPedidosApplication.class, args);
+    }
+
+}

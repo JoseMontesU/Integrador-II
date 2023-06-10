@@ -16,5 +16,7 @@ public interface IProductDao extends CrudRepository<Product, Long>{
 	
 	List<Product> findByNameContainingIgnoreCase(String name);
 
+	@Query("select p.name from Product p where p.id = ?1")
+	String getNombrebyId(Long id);
 
 }

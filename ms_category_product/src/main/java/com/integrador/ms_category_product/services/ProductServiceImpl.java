@@ -277,7 +277,11 @@ public class ProductServiceImpl implements IProductService {
 		
 		return new ResponseEntity<ProductResponseRest>(response, HttpStatus.OK);
 	}
-	
-	
+
+	@Override
+	public String getNombre(Long id) {
+		return productDao.getNombrebyId(id);
+	}
+
 
 }

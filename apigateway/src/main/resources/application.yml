@@ -29,13 +29,10 @@ spring:
             - Method=GET,POST,PUT,DELETE
           filters:
             - name: AuthenticationFilter
-#        - id: person_service
-#          uri: lb://ms-person
-#          predicates:
-#            - Path=/person/**
-#            - Method=GET,POST,PUT,DELETE
-#          filters:
-#            - name: AuthenticationFilter
-#          predicates:
-#            - Path=/**
-##            - Path=/person/**
+        - id: pedidos_service
+          uri: lb://ms-pedidos
+          predicates:
+            - Path=/api/pedido/**
+            - Method=GET,POST,PUT,DELETE
+          filters:
+            - name: AuthenticationFilter

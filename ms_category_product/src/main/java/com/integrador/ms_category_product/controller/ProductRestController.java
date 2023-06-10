@@ -9,6 +9,7 @@ import com.integrador.ms_category_product.response.ProductResponseRest;
 import com.integrador.ms_category_product.services.IProductService;
 import com.integrador.ms_category_product.util.ProductExcelExporter;
 import com.integrador.ms_category_product.util.Util;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,7 +38,7 @@ public class ProductRestController {
 	public ResponseEntity<ProductResponseRest> save(
 				@RequestParam("picture") MultipartFile picture,
 				@RequestParam("name") String name, 
-				@RequestParam("price") int price,
+				@RequestParam("price") Double price,
 				@RequestParam("account") int account,
 				@RequestParam("categoryId") Long categoryID) throws IOException
 	{
@@ -83,7 +84,7 @@ public class ProductRestController {
 	public ResponseEntity<ProductResponseRest> update(
 			@RequestParam("picture") MultipartFile picture,
 			@RequestParam("name") String name, 
-			@RequestParam("price") int price,
+			@RequestParam("price") Double price,
 			@RequestParam("account") int account,
 			@RequestParam("categoryId") Long categoryID,
 			@PathVariable Long id) throws IOException
@@ -100,6 +101,11 @@ public class ProductRestController {
 		return response;
 		
 		
+	}
+
+	@GetMapping("/products/name/{id}")
+	public ResponseEntity<?> getNombreById(@PathVariable Long id){
+		return new ResponseEntity<>(productService.getNombre(id), HttpStatus.OK);
 	}
 
 	@GetMapping("/products/export/excel")

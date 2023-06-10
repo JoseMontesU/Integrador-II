@@ -62,6 +62,7 @@ services:
         -Xmx256M
         -DEUREKA_SERVER=http://registry-discovery:8761/eureka/
         -DMYSQL=jdbc:mysql://mysql/db_users?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
+        -DPORT=8081
         # -DWORK_ENV=production
 #        -DWORK_ENV=development
 #        -Dspring.profiles.active=production
@@ -80,6 +81,7 @@ services:
         -Xmx256M
         -DEUREKA_SERVER=http://registry-discovery:8761/eureka/
         -DMYSQL=jdbc:mysql://mysql/db_inventory?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
+        -DPORT=8082
         # -DWORK_ENV=production
 #        -DWORK_ENV=development
 #        -Dspring.profiles.active=production
@@ -88,6 +90,25 @@ services:
       # - configuration
     ports:
       - 8082:8082
+#######################################################
+  pedidos-microservice:
+    container_name: ms-pedidos
+    image: microservices/ms-ms_pedidos:0.0.1-SNAPSHOT
+    environment:
+      - JAVA_OPTS=
+        -Xms256M
+        -Xmx256M
+        -DEUREKA_SERVER=http://registry-discovery:8761/eureka/
+        -DMYSQL=jdbc:mysql://mysql/db_pedidos?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
+        -DPORT=8083
+        # -DWORK_ENV=production
+#        -DWORK_ENV=development
+#        -Dspring.profiles.active=production
+    depends_on:
+      - registry-discovery
+      # - configuration
+    ports:
+      - 8083:8083
  ##########################################################################  
   apigateway:
     container_name: apigateway
