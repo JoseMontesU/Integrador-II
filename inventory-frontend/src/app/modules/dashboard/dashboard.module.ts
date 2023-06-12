@@ -9,6 +9,7 @@ import { CategoryModule } from '../category/category.module';
 import { ProductModule } from '../product/product.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgChartsModule } from 'ng2-charts';
+import { PedidoModule } from '../pedido/pedido.module';
 
 
 
@@ -21,6 +22,7 @@ import { NgChartsModule } from 'ng2-charts';
     SharedModule,
     CategoryModule,
     ProductModule,
+    PedidoModule,
     MaterialModule,
     FlexLayoutModule,
     NgChartsModule

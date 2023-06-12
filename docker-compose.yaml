@@ -101,6 +101,8 @@ services:
         -DEUREKA_SERVER=http://registry-discovery:8761/eureka/
         -DMYSQL=jdbc:mysql://mysql/db_pedidos?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
         -DPORT=8083
+        -DMS_USER=http://user-microservice:8081/api/user/name/
+        -DMS_CATEGRY_PRODUCT=http://category-product-microservice:8082/api/v1/products/name/
         # -DWORK_ENV=production
 #        -DWORK_ENV=development
 #        -Dspring.profiles.active=production
