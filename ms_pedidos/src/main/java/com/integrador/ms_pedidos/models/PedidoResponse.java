@@ -4,19 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "pedidos")
-public class Pedido {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class PedidoResponse {
+    private Long Id;
     private String userId;
+    private String userName;
     private LocalDate fechaPedido;
     private LocalDate fechaEntrega;
 }
