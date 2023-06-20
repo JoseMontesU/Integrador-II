@@ -1,1 +1,48 @@
-<p>new-pedido works!</p>
+<h2 mat-dialog-title>{{ estadoFormulario }} nuevo Pedido</h2>
+<mat-dialog-content>
+  <form [formGroup]="pedidoForm">
+    <div class="category-container">
+      <mat-form-field *ngIf="isAdmin">
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="userId">
+          <mat-option *ngFor="let user of users" [value]="user.id">
+            {{ user.first_NAME }} {{ user.last_NAME }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="isAdmin">
+        <input
+          matInput
+          placeholder="Feha Pedido"
+          formControlName="fechaPedido"
+          type="date"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Feha Entrega"
+          formControlName="fechaEntrega"
+          type="date"
+          required
+        />
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button
+    mat-button
+    color="primary"
+    (click)="onSave()"
+    [disabled]="pedidoForm.invalid"
+  >
+    <mat-icon>save</mat-icon> Guardar
+  </button>
+
+  <button mat-button color="primary" (click)="onCancel()">
+    <mat-icon>cancel</mat-icon> Cancelar
+  </button>
+</mat-dialog-actions>

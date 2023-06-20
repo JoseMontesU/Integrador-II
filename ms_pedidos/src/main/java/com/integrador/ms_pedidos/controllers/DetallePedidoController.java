@@ -22,6 +22,10 @@ public class DetallePedidoController {
     public ResponseEntity<List<DetallePedidoResponse>> getAll(){
         return new ResponseEntity<>(detallePedidoService.getAll(), HttpStatus.OK);
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<List<DetallePedidoResponse>> getByPedidoId(@PathVariable Long id){
+        return new ResponseEntity<>(detallePedidoService.getByPedidoId(id), HttpStatus.OK);
+    }
 
     @PostMapping
     public ResponseEntity<DetallePedido> create(@RequestBody DetallePedido detallePedido){
@@ -31,6 +35,11 @@ public class DetallePedidoController {
     @PutMapping("/{id}")
     public ResponseEntity<DetallePedido> update(@RequestBody DetallePedido detallePedido,@PathVariable Long id){
         return new ResponseEntity<>(detallePedidoService.Update(detallePedido,id),HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id){
+        return new ResponseEntity<>(detallePedidoService.deleteDetallePedido(id),HttpStatus.OK);
     }
 
 }

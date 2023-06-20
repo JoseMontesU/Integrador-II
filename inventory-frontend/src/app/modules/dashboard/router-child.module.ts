@@ -4,6 +4,7 @@ import { CategoryComponent } from '../category/components/category/category.comp
 import { ProductComponent } from '../product/product/product.component';
 import { HomeComponent } from './components/home/home.component';
 import { PedidoComponent } from '../pedido/pedido/pedido.component';
+import { DetallePedidoComponent } from '../detalle-pedido/detalle-pedido/detalle-pedido.component';
 
 
 const childRoutes: Routes = [
@@ -11,7 +12,8 @@ const childRoutes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'category', component: CategoryComponent },
     { path: 'product', component: ProductComponent },
-    { path: 'pedido', component: PedidoComponent }
+    { path: 'pedido', component: PedidoComponent },
+    { path: 'detalle-pedido', component: DetallePedidoComponent },
 ]
 
 @NgModule({

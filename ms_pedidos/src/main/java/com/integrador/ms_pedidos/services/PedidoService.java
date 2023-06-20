@@ -34,6 +34,17 @@ public class PedidoService {
             return pedidoResponse;
         }).collect(Collectors.toList());
     }
+    public List<PedidoResponse> getByUserId(String id){
+        return pedidoRepository.getPedidoByUserId(id).stream().map(x ->{
+            PedidoResponse pedidoResponse = new PedidoResponse();
+            pedidoResponse.setId(x.getId());
+            pedidoResponse.setUserId(x.getUserId());
+            pedidoResponse.setUserName(getUsername(x.getUserId()));
+            pedidoResponse.setFechaPedido(x.getFechaPedido());
+            pedidoResponse.setFechaEntrega(x.getFechaEntrega());
+            return pedidoResponse;
+        }).collect(Collectors.toList());
+    }
 
     public Pedido createPedido(Pedido pedido){
         return pedidoRepository.save(pedido);
@@ -45,6 +56,14 @@ public class PedidoService {
         log.warn("URL: "+url);
         ResponseEntity<String> response= restTemplate.getForEntity(url+id, String.class);
         return response.getBody();
+    }
+
+    public Pedido updatePedido(Pedido pedido, Long id){
+        Pedido pedidoToSave = pedidoRepository.getReferenceById(id);
+        pedidoToSave.setFechaPedido(pedido.getFechaPedido());
+        pedidoToSave.setFechaEntrega(pedido.getFechaEntrega());
+        pedidoToSave.setUserId(pedido.getUserId());
+        return pedidoRepository.save(pedidoToSave);
     }
 
 }

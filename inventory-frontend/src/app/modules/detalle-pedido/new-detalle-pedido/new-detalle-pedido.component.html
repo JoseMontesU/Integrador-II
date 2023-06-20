@@ -1,0 +1,71 @@
+<h2 mat-dialog-title>{{ estadoFormulario }} nuevo Producto</h2>
+<mat-dialog-content>
+  <form [formGroup]="detallePedidoForm">
+    <div class="category-container">
+      <mat-form-field *ngIf="isAdmin">
+        <input
+          matInput
+          placeholder="Pedido Id"
+          formControlName="pedidoId"
+          required
+        />
+      </mat-form-field>
+      <!-- <mat-form-field>
+        <input
+          matInput
+          placeholder="Producto Id"
+          formControlName="productoId"
+          required
+        />
+      </mat-form-field> -->
+      <mat-form-field>
+        <mat-label>Categoría</mat-label>
+        <mat-select (valueChange)="onChangeCategory($event)">
+          <mat-option *ngFor="let cat of categories" [value]="cat">
+            {{ cat.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Producto</mat-label>
+        <mat-select formControlName="productoId">
+          <mat-option *ngFor="let prod of products" [value]="prod.id">
+            {{ prod.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- <mat-form-field>
+        <input
+          matInput
+          placeholder="Producto"
+          formControlName="productoName"
+          required
+        />
+      </mat-form-field> -->
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Cantidad"
+          formControlName="cantidad"
+          type="number"
+          required
+        />
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button
+    mat-button
+    color="primary"
+    (click)="onSave()"
+    [disabled]="detallePedidoForm.invalid"
+  >
+    <mat-icon>save</mat-icon> Guardar
+  </button>
+
+  <button mat-button color="primary" (click)="onCancel()">
+    <mat-icon>cancel</mat-icon> Cancelar
+  </button>
+</mat-dialog-actions>

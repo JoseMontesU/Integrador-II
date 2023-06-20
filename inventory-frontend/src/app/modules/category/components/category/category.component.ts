@@ -16,16 +16,17 @@ import { NewCategoryComponent } from '../new-category/new-category.component';
 export class CategoryComponent implements OnInit {
 
   isAdmin: any;
+  displayedColumns: string[]=[];
 
   constructor(private categoryService: CategoryService,
               public dialog: MatDialog, private snackBar: MatSnackBar,
               private util: UtilService) { }
-
-  ngOnInit(): void {
-    this.getCategories();
-    this.isAdmin = this.util.isAdmin();
-  }
-  displayedColumns: string[] = ['id', 'name', 'description', 'actions'];
+              
+              ngOnInit(): void {
+                this.getCategories();
+                this.isAdmin = this.util.isAdmin();
+                this.displayedColumns = this.isAdmin? ['id', 'name', 'description', 'actions']: ['id', 'name', 'description'];
+              }
   dataSource = new MatTableDataSource<CategoryElement>();
 
   @ViewChild(MatPaginator)

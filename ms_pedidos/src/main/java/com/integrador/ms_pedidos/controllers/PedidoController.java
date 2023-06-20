@@ -19,9 +19,18 @@ public class PedidoController {
     public ResponseEntity<?> getAll(){
         return new ResponseEntity<>(pedidoService.getAll(), HttpStatus.OK);
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getByUserId(@PathVariable String id){
+        return new ResponseEntity<>(pedidoService.getByUserId(id), HttpStatus.OK);
+    }
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody Pedido pedido){
         return new ResponseEntity<>(pedidoService.createPedido(pedido),HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(@RequestBody Pedido pedido, @PathVariable Long id){
+        return new ResponseEntity<>(pedidoService.updatePedido(pedido,id),HttpStatus.OK);
     }
 }

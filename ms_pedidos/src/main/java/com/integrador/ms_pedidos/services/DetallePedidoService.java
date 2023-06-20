@@ -10,7 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -26,6 +28,18 @@ public class DetallePedidoService {
 
     public List<DetallePedidoResponse> getAll(){
         return detallePedidoRepository.findAll().stream().map(x -> {
+            return new DetallePedidoResponse(
+                    x.getId(),
+                    x.getPedidoId(),
+                    x.getProductoId(),
+                    getProductName(x.getProductoId()),
+                    x.getCantidad()
+            );
+        }).collect(Collectors.toList());
+    }
+
+    public List<DetallePedidoResponse> getByPedidoId(Long id){
+        return detallePedidoRepository.getDetallePedidoByPedidoId(id).stream().map(x -> {
             return new DetallePedidoResponse(
                     x.getId(),
                     x.getPedidoId(),
@@ -54,5 +68,12 @@ public class DetallePedidoService {
         log.warn("URL: "+url);
         ResponseEntity<String> response= restTemplate.getForEntity(url+id, String.class);
         return response.getBody();
+    }
+
+    public Map<String, String> deleteDetallePedido(Long id){
+        detallePedidoRepository.deleteById(id);
+        Map<String,String> map = new HashMap<>();
+        map.put("message","Item with id '"+id+"' deleted successfully");
+        return map;
     }
 }

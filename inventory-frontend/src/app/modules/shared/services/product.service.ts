@@ -12,32 +12,32 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   getProducts(){
-    const endpoint = `${ base_url}/products`;
+    const endpoint = `${ base_url}/v1/products`;
     return this.http.get(endpoint);
   }
 
   saveProduct(body: any){
-    const endpoint = `${ base_url}/products`;
+    const endpoint = `${ base_url}/v1/products`;
     return this.http.post(endpoint, body);
   }
 
   updateProduct (body: any, id: any){
-    const endpoint = `${ base_url}/products/ ${id}`;
+    const endpoint = `${ base_url}/v1/products/ ${id}`;
     return this.http.put(endpoint, body);
   }
 
   deleteProduct(id: any){
-    const endpoint = `${ base_url}/products/ ${id}`;
+    const endpoint = `${ base_url}/v1/products/ ${id}`;
     return this.http.delete(endpoint);
   }
 
   getProductByName(name: any){
-    const endpoint = `${ base_url}/products/filter/${name}`;
+    const endpoint = `${ base_url}/v1/products/filter/${name}`;
     return this.http.get(endpoint);
   }
 
   exportProduct(){
-    const endpoint = `${base_url}/products/export/excel`;
+    const endpoint = `${base_url}/v1/products/export/excel`;
     return this.http.get(endpoint, {
       responseType: 'blob'
     });

@@ -1,9 +1,9 @@
 <mat-card>
-  <h2 class="alinear">Listado de Categorías</h2>
+  <h2 class="alinear">Listado de Detalle Pedidos</h2>
   <mat-card-header>
     <div>
-      <mat-form-field hintLabel="Busque categoria" appearance="fill">
-        <mat-label>Buscar Categorías</mat-label>
+      <mat-form-field hintLabel="Busque pedido" appearance="fill">
+        <mat-label>Buscar Pedidos</mat-label>
         <input matInput #input (keyup)="buscar(input.value)" />
       </mat-form-field>
     </div>
@@ -13,12 +13,11 @@
       <ul fxLayout="row" fxLayoutGap="20px">
         <li>
           <button
-            *ngIf="isAdmin"
             mat-raised-button
             color="primary"
-            (click)="openCategoryDialog()"
+            (click)="openDetallePedidoDialog()"
           >
-            Agregar Categoría
+            Agregar Producto
           </button>
         </li>
         <li>
@@ -36,20 +35,30 @@
     <table mat-table [dataSource]="dataSource" class="mat-cell">
       <!-- id column-->
       <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef>Nº</th>
+        <th mat-header-cell *matHeaderCellDef>ID</th>
         <td mat-cell *matCellDef="let element">{{ element.id }}</td>
       </ng-container>
 
       <!-- name column -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Nombre</th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      <ng-container matColumnDef="pedidoId">
+        <th mat-header-cell *matHeaderCellDef>Pedido ID</th>
+        <td mat-cell *matCellDef="let element">{{ element.pedidoId }}</td>
       </ng-container>
 
       <!-- description column -->
-      <ng-container matColumnDef="description">
-        <th mat-header-cell *matHeaderCellDef>Descripción</th>
-        <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+      <!-- <ng-container matColumnDef="productoId">
+        <th mat-header-cell *matHeaderCellDef>Producto ID</th>
+        <td mat-cell *matCellDef="let element">{{ element.productoId }}</td>
+      </ng-container> -->
+      <!-- description column -->
+      <ng-container matColumnDef="productoName">
+        <th mat-header-cell *matHeaderCellDef>Nombre Producto</th>
+        <td mat-cell *matCellDef="let element">{{ element.productoName }}</td>
+      </ng-container>
+      <!-- description column -->
+      <ng-container matColumnDef="cantidad">
+        <th mat-header-cell *matHeaderCellDef>Cantidad</th>
+        <td mat-cell *matCellDef="let element">{{ element.cantidad }}</td>
       </ng-container>
 
       <!-- actions-->
@@ -59,12 +68,25 @@
           <button
             mat-icon-button
             color="accent"
-            (click)="edit(element.id, element.name, element.description)"
+            (click)="
+              edit(
+                element.id,
+                element.pedidoId,
+                element.productoId,
+                element.productoName,
+                element.cantidad
+              )
+            "
           >
             <mat-icon aria-label="Edit">edit</mat-icon>
           </button>
 
-          <button mat-icon-button color="accent" (click)="delete(element.id)">
+          <button
+            *ngIf="isAdmin"
+            mat-icon-button
+            color="accent"
+            (click)="delete(element.id)"
+          >
             <mat-icon aria-label="Delete">delete</mat-icon>
           </button>
         </td>

@@ -16,38 +16,38 @@ export class CategoryService {
 
   getCategories(){
 
-    const endpoint = `${base_url}/categories`;
+    const endpoint = `${base_url}/v1/categories`;
     return this.http.get(endpoint,this.httpOptions);
 
   }
 
   saveCategorie(body: any) {
-    const endpoint = `${base_url}/categories`;
+    const endpoint = `${base_url}/v1/categories`;
     return this.http.post(endpoint, body,this.httpOptions);
   }
 
   updateCategorie(body: any, id: any){
-    const endpoint = `${base_url}/categories/ ${id}`;
+    const endpoint = `${base_url}/v1/categories/ ${id}`;
     return this.http.put(endpoint, body, this.httpOptions);
   }
 
   deleteCategorie(id: any){
-    const endpoint = `${base_url}/categories/ ${id}`;
+    const endpoint = `${base_url}/v1/categories/ ${id}`;
     return this.http.delete(endpoint, this.httpOptions);
   }
 
   getCategorieById(id: any){
-    const endpoint = `${base_url}/categories/ ${id}`;
+    const endpoint = `${base_url}/v1/categories/ ${id}`;
     return this.http.get(endpoint, this.httpOptions);
   }
 
   getCategoryByName(name: any){
-    const endpoint = `${ base_url}/categories/filter/${name}`;
+    const endpoint = `${ base_url}/v1/categories/filter/${name}`;
     return this.http.get(endpoint, this.httpOptions);
   }
 
   exportCategories(){
-    const endpoint = `${base_url}/categories/export/excel`;
+    const endpoint = `${base_url}/v1/categories/export/excel`;
     return this.http.get(endpoint, {
       responseType: 'blob'
     });

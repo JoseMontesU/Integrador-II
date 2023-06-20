@@ -16,6 +16,7 @@ import { NewProductComponent } from '../new-product/new-product.component';
 export class ProductComponent implements OnInit {
 
   isAdmin: any;
+  displayedColumns: string[] = [];
 
   constructor(private productService: ProductService,
     public dialog: MatDialog, private snackBar: MatSnackBar,
@@ -24,9 +25,10 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {
     this.getProducts();
     this.isAdmin = this.util.isAdmin();
+    this.displayedColumns = this.isAdmin? ['id', 'name', 'price', 'account', 'category', 'picture',  'actions']:
+    ['id', 'name', 'price', 'account', 'category', 'picture'];
   }
 
-  displayedColumns: string[] = ['id', 'name', 'price', 'account', 'category', 'picture',  'actions'];
   dataSource = new MatTableDataSource<ProductElement>();
 
   @ViewChild(MatPaginator)
