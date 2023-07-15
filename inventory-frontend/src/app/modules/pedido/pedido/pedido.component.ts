@@ -8,6 +8,7 @@ import { PedidoService } from '../../shared/services/pedido.service';
 import { Pedido } from '../../shared/interfaces/pedido.interface';
 import { NewPedidoComponent } from '../new-pedido/new-pedido.component';
 import { Router } from '@angular/router';
+import {CategoryService} from "../../shared/services/category.service";
 
 @Component({
   selector: 'app-pedido',
@@ -21,6 +22,7 @@ export class PedidoComponent implements OnInit{
   constructor(
     private router: Router,
     private pedidoService: PedidoService,
+    private categoryService: CategoryService,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
     private util: UtilService) { }
@@ -93,10 +95,10 @@ export class PedidoComponent implements OnInit{
     //       let file = new Blob([data], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
     //       let fileUrl = URL.createObjectURL(file);
     //       var anchor = document.createElement("a");
-    //       anchor.download = "categories.xlsx";
+    //       anchor.download = "pedido.xlsx";
     //       anchor.href = fileUrl;
     //       anchor.click();
-
+    //
     //       this.openSnackBar("Archivo exportado correctamente", "Exitosa");
     //     }, (error: any) =>{
     //       this.openSnackBar("No se pudo exportar el archivo", "Error");

@@ -4,8 +4,8 @@ import { environment } from 'src/environments/environment';
 import { Pedido } from '../interfaces/pedido.interface';
 import { Observable } from 'rxjs';
 
-const base_url = environment.base_url;
-
+// const base_url = environment.base_url;
+const base_url = "http://localhost:8079/api";
 @Injectable({
   providedIn: 'root'
 })

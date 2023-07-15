@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../interfaces/user.interface';
 
-const base_url = environment.base_url;
-
+// const base_url = environment.base_url;
+const base_url = "http://localhost:8079/api";
 @Injectable({
   providedIn: 'root'
 })
